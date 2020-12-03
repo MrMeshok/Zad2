@@ -19,6 +19,8 @@ use App\Http\Controllers\BookController;
 // Route::get('HOME', [HomeController::class, 'redirect']);
 Route::get('', [HomeController::class, 'authors']);
 Route::get('del_author/{author_id}', [HomeController::class, 'del_author'])->middleware('auth');
+Route::post('AdminCreateUser', [HomeController::class, 'AdminCreateUser'])->middleware('auth');
+Route::post('AdminEditUser', [HomeController::class, 'AdminEditUser'])->middleware('auth');
 
 Route::get('library/{author_id}', [BookController::class, 'library']);
 Route::get('library/del/{book_id}', [BookController::class, 'del'])->middleware('auth');
