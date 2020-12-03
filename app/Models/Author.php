@@ -11,6 +11,16 @@ class Author extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function Role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    }
+
+    public function isAdmin() 
+    {
+        return $this->Role()->where('id', '1')->exists();
+    }
+
     // protected $table = 'authors';
     /**
      * The attributes that are mass assignable.

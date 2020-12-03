@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('', "/home");
+// Route::get('HOME', [HomeController::class, 'redirect']);
+Route::get('', [HomeController::class, 'authors']);
+Route::get('del_author/{author_id}', [HomeController::class, 'del_author'])->middleware('auth');
 
-Route::view('home', 'home')->middleware('auth');
+Route::get('library/{author_id}', [BookController::class, 'library']);
+Route::get('library/del/{book_id}', [BookController::class, 'del'])->middleware('auth');
+Route::post('library/add', [BookController::class, 'add'])->middleware('auth');
+Route::post('library/edit', [BookController::class, 'edit'])->middleware('auth');
